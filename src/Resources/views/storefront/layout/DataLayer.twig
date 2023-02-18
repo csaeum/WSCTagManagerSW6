@@ -1,88 +1,12 @@
 {# Produkt View item - Produktdetail Seite START #}
-
 {% if controllerName == "Product" && controllerAction == "index" %}
-
-    'event': 'view_item',
-    'ecommerce': {
-        'items': [
-            {
-                'item_id': '{{ page.product.productNumber }}',
-                'item_name': '{{ page.product.translated.name }}',
-
-{# START Affiliation von SW6 derzeit nicht benutzt#}
-                {% if nichtbenutzt %}'affiliation': '',{% endif %}
-{# ENDE Affiliation #}
-
-                'currency': '{{ context.currency.translated.shortName }}',
-
-{# START Discount #}
-                {% if page.product.calculatedPrice.listPrice.discount %}
-                    'discount': {{ page.product.calculatedPrice.listPrice.discount|replace({",":".","-":""}) }},
-                {% endif %}
-{# ENDE Discount #}
-
-                'item_brand': '{{ page.product.manufacturer.translated.name }}',
-
-{# START Category Schleife #}
-                {% for cat in page.product.seoCategory.translated.breadcrumb|sort|reverse %}
-                    'item_category{% if loop.index0 == "0" %}{% else %}{{ loop.index0 }}{% endif %}': '{{ cat }}',
-                {% endfor %}
-{# ENDE Category Schleife #}
-
-{# START Variantenartikel #}
-                {% if page.product.variation %}
-                    'item_variant': '{% for variation in page.product.variation|sort|reverse %}{{ variation.group }}-{{ variation.option }}{% if loop.last %}{% else %} || {%  endif %}{% endfor %}',
-                {% endif %}
-{# ENDE Variantenartikel #}
-
-                    'price':{% if page.product.calculatedPrice.listPrice.discount < page.product.calculatedPrice.totalPrice %} {{ page.product.calculatedPrice.totalPrice|replace({",":"."}) }}, {% else %} {{ page.product.calculatedPrice.listPrice.discount|replace({",":"."}) }}, {% endif %}
-                    'quantity': {{ page.product.minPurchase }},
-            }
-        ]
-    }
-    
+{% sw_include '@Storefront/storefront/layout/DataLayer/view_item.twig' %}
 {% endif %}
 {# Produkt View item - Produktdetail Seite ENDE #}
 
 {# Produkt View item List - Kategorieseite START #}
 {% if controllerName == 'product' && controllerAction == 'index2' %}
-    
-    'event': 'view_item_list',
-    'ecommerce': {
-        'items': [
-
-            {% for sArticles in sArticle %}
-
-                {% if counter is defined %}
-                    {% set counter = 0 %}
-                {% endif %}
-
-            {
-                'item_id': '{sArticle.ordernumber}',
-                'item_name': '{sArticle.articleName|escape}',
-                'affiliation': '',
-                'currency': '{{ context.currency.translated.shortName }}',
-
-                {# START Discount #}
-                {% if sArticle.pseudopricePercent.float %}
-                    'discount': {$sArticle.pseudopricePercent.float|number|replace:",":"."}%,
-                {% endif %}
-                {# ENDE Discount #}
-
-                'index': {{ counter }}{% set counter = counter + 1 %},
-                'item_brand': '{{ page.product.manufacturer.translated.name }}',
-                'item_category': '{$sBreadcrumb[0].name}',
-                'item_list_name': 'Kategorie {$sBreadcrumb[0].name}',
-                'item_variant': '{$sArticle.additionaltext}',
-                'price': {$sArticle.price|replace:",":"."},
-                'quantity': {$sArticle.minpurchase|replace:",":"."},
-            },
-
-            {% endfor %}
-
-        ]
-    }
-    
+{% sw_include '@Storefront/storefront/layout/DataLayer/view_item_list.twig' %}
 {% endif %}
 {# Produkt View item List - Kategorieseite ENDE #}
 
@@ -111,45 +35,7 @@
 
     {# Cart View - Warenkorb ansehen START #}
     {% if baseUrl === '/checkout/cart' %}
-        
-        'event': 'view_cart',
-        'ecommerce': {
-        'affiliation': '',
-        'value: {$sBasket.Amount|replace:",":"."},
-        'currency': '{{ context.currency.translated.shortName }}',
-        'items': [
-
-            {% for sBasket in sArticle %}
-                {% if counter is defined %}
-                    {% set counter = 0 %}
-                {% endif %}
-
-                {
-                'item_id': '{$sArticle.ordernumber}',
-                'item_name': '{$sArticle.articleName|escape}',
-                'affiliation': '',
-                'currency': '{{ context.currency.translated.shortName }}',
-
-                {# START Discount #}
-                {% if sArticle.pseudopricePercent.float %}
-                    'discount': {$sArticle.pseudopricePercent.float|number|replace:",":"."}%,
-                {% endif %}
-                {# ENDE Discount #}
-
-                'index': {{ counter }}{% set counter = counter + 1 %},
-                'item_brand': '{{ page.product.manufacturer.translated.name }}',
-                'item_category': '{$sBreadcrumb[0].name}',
-                'item_list_name': 'Kategorie {$sBreadcrumb[0].name}',
-                'item_variant': '{$sArticle.additionaltext}',
-                'price': {$sArticle.price|replace:",":"."},
-                'quantity': {$sArticle.minpurchase|replace:",":"."},
-                },
-
-            {% endfor %}
-
-            ]
-        %}
-        
+    {% sw_include '@Storefront/storefront/layout/DataLayer/view_cart.twig' %}
     {% endif %}
     {# Cart View - Warenkorb ansehen ENDE #}
 
@@ -285,46 +171,7 @@
 
     {# Purchase - Abschluss Seite START #}
     {% if baseUrl === '/checkout/finish' %}
-        
-        'event': 'purchase',
-        'ecommerce': {
-            'transaction_id': '{$sOrderNumber}',
-            'affiliation': '',
-            'value': {$sBasket.Amount|replace:",":"."},
-            'tax': {$sBasket.sAmountTax|replace:",":"."},
-            'shipping': {$sBasket.sShippingcostsWithTax|replace:",":"."},
-            'currency': '{{ context.currency.translated.shortName }}',
-            'coupon': '',
-            'items': [
-
-            {% for sBasket in sArticle %}
-
-                {% if counter is defined %}
-                    {% set counter = 0 %}
-                {% endif %}
-
-                    {
-                    'item_id': '{$sArticle.ordernumber}',
-                    'item_name': '{$sArticle.articlename|escape}',
-                    'affiliation': '',
-                    'currency': '{{ context.currency.translated.shortName }}',
-
-                    {# START Discount #}
-                    {% if sArticle.pseudopricePercent.float %}
-                        'discount': {sArticle.pseudopricePercent.float|number|replace:",":"."}%,
-                    {% endif %}
-                    {# ENDE Discount #}
-
-                    'index': {{ counter }} {% set counter = counter + 1 %},
-                    'price': {$sArticle.price|replace:",":"."},
-                    'quantity': {$sArticle.quantity|replace:",":"."},
-                    },
-
-            {% endfor %}
-
-            ]
-        }
-
+        {% sw_include '@Storefront/storefront/layout/DataLayer/purchase.twig' %}
     {% endif %}
     {# Purchase - Abschluss Seite ENDE #}
 

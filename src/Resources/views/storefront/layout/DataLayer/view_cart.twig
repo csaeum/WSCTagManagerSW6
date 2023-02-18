@@ -1,0 +1,37 @@
+'event': 'view_cart',
+'ecommerce': {
+'affiliation': '',
+'value: {$sBasket.Amount|replace:",":"."},
+'currency': '{{ context.currency.translated.shortName }}',
+'items': [
+
+{% for sBasket in sArticle %}
+    {% if counter is defined %}
+        {% set counter = 0 %}
+    {% endif %}
+
+    {
+    'item_id': '{$sArticle.ordernumber}',
+    'item_name': '{$sArticle.articleName|escape}',
+    'affiliation': '',
+    'currency': '{{ context.currency.translated.shortName }}',
+
+    {# START Discount #}
+    {% if sArticle.pseudopricePercent.float %}
+        'discount': {$sArticle.pseudopricePercent.float|number|replace:",":"."}%,
+    {% endif %}
+    {# ENDE Discount #}
+
+    'index': {{ counter }}{% set counter = counter + 1 %},
+    'item_brand': '{{ page.product.manufacturer.translated.name }}',
+    'item_category': '{$sBreadcrumb[0].name}',
+    'item_list_name': 'Kategorie {$sBreadcrumb[0].name}',
+    'item_variant': '{$sArticle.additionaltext}',
+    'price': {$sArticle.price|replace:",":"."},
+    'quantity': {$sArticle.minpurchase|replace:",":"."},
+    },
+
+{% endfor %}
+
+]
+}

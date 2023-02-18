@@ -1,0 +1,38 @@
+'event': 'purchase',
+'ecommerce': {
+'transaction_id': '{$sOrderNumber}',
+'affiliation': '',
+'value': {$sBasket.Amount|replace:",":"."},
+'tax': {$sBasket.sAmountTax|replace:",":"."},
+'shipping': {$sBasket.sShippingcostsWithTax|replace:",":"."},
+'currency': '{{ context.currency.translated.shortName }}',
+'coupon': '',
+'items': [
+
+{% for sBasket in sArticle %}
+
+    {% if counter is defined %}
+        {% set counter = 0 %}
+    {% endif %}
+
+    {
+    'item_id': '{$sArticle.ordernumber}',
+    'item_name': '{$sArticle.articlename|escape}',
+    'affiliation': '',
+    'currency': '{{ context.currency.translated.shortName }}',
+
+    {# START Discount #}
+    {% if sArticle.pseudopricePercent.float %}
+        'discount': {sArticle.pseudopricePercent.float|number|replace:",":"."}%,
+    {% endif %}
+    {# ENDE Discount #}
+
+    'index': {{ counter }} {% set counter = counter + 1 %},
+    'price': {$sArticle.price|replace:",":"."},
+    'quantity': {$sArticle.quantity|replace:",":"."},
+    },
+
+{% endfor %}
+
+]
+}

@@ -1,0 +1,38 @@
+'event': 'view_item',
+'ecommerce': {
+'items': [
+{
+'item_id': '{{ page.product.productNumber }}',
+'item_name': '{{ page.product.translated.name }}',
+
+{# START Affiliation von SW6 derzeit nicht benutzt #}
+            {% if nichtbenutzt %}'affiliation': '',{% endif %}
+{# ENDE Affiliation #}
+
+'currency': '{{ context.currency.translated.shortName }}',
+
+{# START Discount #}
+            {% if page.product.calculatedPrice.listPrice.discount %}
+                'discount': {{ page.product.calculatedPrice.listPrice.discount|replace({",":".","-":""}) }},
+            {% endif %}
+{# ENDE Discount #}
+
+'item_brand': '{{ page.product.manufacturer.translated.name }}',
+
+{# START Category Schleife #}
+            {% for cat in page.product.seoCategory.translated.breadcrumb|sort|reverse %}
+                'item_category{% if loop.index0 == "0" %}{% else %}{{ loop.index0 }}{% endif %}': '{{ cat }}',
+            {% endfor %}
+{# ENDE Category Schleife #}
+
+{# START Variantenartikel #}
+            {% if page.product.variation %}
+                'item_variant': '{% for variation in page.product.variation|sort|reverse %}{{ variation.group }}-{{ variation.option }}{% if loop.last %}{% else %} || {% endif %}{% endfor %}',
+            {% endif %}
+{# ENDE Variantenartikel #}
+
+'price':{% if page.product.calculatedPrice.listPrice.discount < page.product.calculatedPrice.totalPrice %} {{ page.product.calculatedPrice.totalPrice|replace({",":"."}) }}, {% else %} {{ page.product.calculatedPrice.listPrice.discount|replace({",":"."}) }}, {% endif %}
+'quantity': {{ page.product.minPurchase }},
+}
+]
+}
