@@ -1,176 +1,84 @@
+controllerName: {{ controllerName|lower }}
+controllerAction: {{ controllerAction|lower }}
+
 {# Produkt View item - Produktdetail Seite START #}
-{% if controllerName == "Product" && controllerAction == "index" %}
-{% sw_include '@Storefront/storefront/layout/DataLayer/view_item.twig' %}
+{% if controllerName == "product" and controllerAction == "index2" %}
+    controllerName: product
+    controllerAction: index
+    {% sw_include '@Storefront/storefront/layout/DataLayer/view_item.twig' %}
 {% endif %}
 {# Produkt View item - Produktdetail Seite ENDE #}
 
 {# Produkt View item List - Kategorieseite START #}
-{% if controllerName == 'product' && controllerAction == 'index2' %}
-{% sw_include '@Storefront/storefront/layout/DataLayer/view_item_list.twig' %}
+{% if controllerName == "navigation" and controllerAction == "index2" %}
+    controllerName: navigation
+    controllerAction: index
+    {% sw_include '@Storefront/storefront/layout/DataLayer/view_item_list.twig' %}
 {% endif %}
 {# Produkt View item List - Kategorieseite ENDE #}
 
-{% if controllerName == 'product' && controllerAction == 'index2' %}
+{% if controllerName == "navigation" and controllerAction == "home2" %}
+    controllerName: navigation
+    controllerAction: home
     Start Seite
 {% endif %}
 
-{% if controllerName == 'product' && controllerAction == 'index2' %}
+{% if controllerName == 'product' and controllerAction == 'index2' %}
     Merkzettel Seite
 {% endif %}
 
-{% if controllerName == 'product' && controllerAction == 'index2' %}
+{% if controllerName == 'product' and controllerAction == 'index2' %}
     register Seite
 {% endif %}
 
-{% if controllerName == 'product' && controllerAction == 'index2' %}
+{% if controllerName == 'product' and controllerAction == 'index2' %}
     custom Seite (Bsp Über Uns)
 {% endif %}
 
-{% if controllerName == 'product' && controllerAction == 'index2' %}
+{% if controllerName == "product" and controllerAction == "index2" %}
     forms Seite (Bsp Kontakt)
 {% endif %}
 
 {# Kompletter Checkout START #}
-{% if controllerName == 'product' && controllerAction == 'index2' %}
+{% if controllerName == "checkout" %}
 
     {# Cart View - Warenkorb ansehen START #}
-    {% if baseUrl === '/checkout/cart' %}
-    {% sw_include '@Storefront/storefront/layout/DataLayer/view_cart.twig' %}
+    {% if controllerAction == "cartpage2" %}
+        controllerName: checkout
+        controllerAction: cartpage
+        {% sw_include '@Storefront/storefront/layout/DataLayer/view_cart.twig' %}
     {% endif %}
     {# Cart View - Warenkorb ansehen ENDE #}
 
     {# Begin Checkout - Kauf starten START #}
-    {% if baseUrl === '/checkout/confirm' %}
-
-        'event': 'begin_checkout',
-        'ecommerce': {
-            'items': [
-
-            {% for sBasket in sArticle %}
-                {% if counter is defined %}
-                    {% set counter = 0 %}
-                {% endif %}
-
-                {
-                'item_id': '{$sArticle.ordernumber}',
-                'item_name': '{$sArticle.articleName|escape}',
-                'affiliation': '',
-                'currency': '{{ context.currency.translated.shortName }}',
-
-                {# START Discount #}
-                {% if sArticle.pseudopricePercent.float %}
-                    'discount': {$sArticle.pseudopricePercent.float|number|replace:",":"."}%,
-                {% endif %}
-                {# ENDE Discount #}
-
-                'index': {{ counter }}{% set counter = counter + 1 %},
-                'item_brand': '{{ page.product.manufacturer.translated.name }}',
-                'item_category': '{$sBreadcrumb[0].name}',
-                'item_list_name': 'Kategorie {$sBreadcrumb[0].name}',
-                'item_variant': '{$sArticle.additionaltext}',
-                'price': {$sArticle.price|replace:",":"."},
-                'quantity': {$sArticle.minpurchase|replace:",":"."},
-                },
-
-            {% endfor %}
-
-            ]
-        }
-        
+    {% if controllerAction == "confirmpage2" %}
+        {% sw_include '@Storefront/storefront/layout/DataLayer/begin_checkout.twig' %}
     {% endif %}
     {# Begin Checkout - Kauf starten ENDE #}
 
     {# add_shipping_info - Shipping START #}
-    {% if baseUrl === '/checkout/shippingPayment/sTarget/checkout' %}
-
-        'event': 'add_shipping_info',
-        'ecommerce': {
-            'currency': '{{ context.currency.translated.shortName }}',
-            'value: {$sBasket.Amount|replace:",":"."},
-            'shipping_tier: '{$sDispatch.name}',
-            'items': [
-
-            {% for sBasket in sArticle %}
-                {% if counter is defined %}
-                    {% set counter = 0 %}
-                {% endif %}
-
-                {
-                'item_id': '{$sArticle.ordernumber}',
-                'item_name': '{$sArticle.articleName|escape}',
-                'affiliation': '',
-                'currency': '{{ context.currency.translated.shortName }}',
-
-                {# START Discount #}
-                {% if sArticle.pseudopricePercent.float %}
-                    'discount': {$sArticle.pseudopricePercent.float|number|replace:",":"."}%,
-                {% endif %}
-                {# ENDE Discount #}
-
-                'index': {{ counter }}{% set counter = counter + 1 %},
-                'item_brand': '{{ page.product.manufacturer.translated.name }}',
-                'item_category': '{$sBreadcrumb[0].name}',
-                'item_list_name': 'Kategorie {$sBreadcrumb[0].name}',
-                'item_variant': '{$sArticle.additionaltext}',
-                'price': {$sArticle.price|replace:",":"."},
-                'quantity': {$sArticle.minpurchase|replace:",":"."},
-                },
-
-            {% endfor %}
-
-            ]
-        }
-        
+    {% if controllerAction == "confirmpage2" %}
+        {% sw_include '@Storefront/storefront/layout/DataLayer/add_shipping_info.twig' %}
     {% endif %}
     {# add_shipping_info - Shipping ENDE #}
 
     {# add_payment_info - Payment START #}
-    {% if baseUrl === '/checkout/shippingPayment/sTarget/checkout' %}
-        
-        'event': 'add_payment_info',
-        'ecommerce': {
-            'currency': '{{ context.currency.translated.shortName }}',
-            'value: {$sBasket.Amount|replace:",":"."},
-            'payment_type: '{$sDispatch.name}',
-            'items': [
-
-        {% for sBasket in sArticle %}
-
-            {% if counter is defined %}
-                {% set counter = 0 %}
-            {% endif %}
-
-            {
-            'item_id': '{$sArticle.ordernumber}',
-            'item_name': '{$sArticle.articleName|escape}',
-            'affiliation': '',
-            'currency': '{{ context.currency.translated.shortName }}',
-
-            {# START Discount #}
-            {% if sArticle.pseudopricePercent.float %}
-                'discount': {sArticle.pseudopricePercent.float|number|replace:",":"."}%,
-            {% endif %}
-            {# ENDE Discount #}
-
-            'index': {{ counter }}{% set counter = counter + 1 %},
-            'item_brand': '{{ page.product.manufacturer.translated.name }}',
-            'item_category': '{$sBreadcrumb[0].name}',
-            'item_list_name': 'Kategorie {$sBreadcrumb[0].name}',
-            'item_variant': '{$sArticle.additionaltext}',
-            'price': {$sArticle.price|replace:",":"."},
-            'quantity': {$sArticle.minpurchase|replace:",":"."},
-            },
-
-        {% endfor %}
-
-            ]
-        }
-        
+    {% if controllerAction == "confirmpage2" %}
+        {% sw_include '@Storefront/storefront/layout/DataLayer/add_payment_info.twig' %}
     {% endif %}
     {# add_payment_info - Payment ENDE #}
 
+    {# confirmpage - Payment START #}
+    {% if controllerAction == "confirmpage2" %}
+        controllerName: checkout
+        controllerAction: confirmpage
+        {% sw_include '@Storefront/storefront/layout/DataLayer/add_payment_info.twig' %}
+    {% endif %}
+    {# confirmpage - Payment ENDE #}
+
     {# Purchase - Abschluss Seite START #}
-    {% if baseUrl === '/checkout/finish' %}
+    {# https://dev-sw6.web-seo-consulting.eu/checkout/finish?orderId=f2e4b28006d7493e81eac6febc46bc87 #}
+    {% if controllerAction == "finishpage" %}
         {% sw_include '@Storefront/storefront/layout/DataLayer/purchase.twig' %}
     {% endif %}
     {# Purchase - Abschluss Seite ENDE #}
