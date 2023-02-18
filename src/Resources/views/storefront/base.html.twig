@@ -1,0 +1,29 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% set tagmanagerConfig = config('TagManagerSW6') %}
+
+{% block base_noscript %}
+
+    {% if tagmanagerConfig.config.wscTagManagerMatomo == "1" and tagmanagerConfig.config.wscTagManagerMatomoPage == "1" %}
+        {% if tagmanagerConfig.config.wscTagManagerMatomoPageID != "X" or tagmanagerConfig.config.wscTagManagerMatomoPageID != "" %}
+            <!-- Matomo (noscript) -->
+                <noscript>
+                    <p><img src="{{ tagmanagerConfig.config.wscTagManagerMatomoURL|raw }}/matomo.php?idsite={{ tagmanagerConfig.config.wscTagManagerMatomoPageID|raw }}&amp;rec=1" style="border:0;" alt="" /></p>
+                </noscript>
+            <!-- End Matomo Code (noscript) -->
+        {% endif %}
+    {% endif %}
+
+    {% if tagmanagerConfig.config.wscTagManagerGoogle == "1" and tagmanagerConfig.config.wscTagManagerGoogleTM == "1" %}
+        {% if tagmanagerConfig.config.wscTagManagerGoogleTagID != 'GTM-xxxxxxx' or tagmanagerConfig.config.wscTagManagerGoogleTagID != '' %}
+            <!-- Google Tag Manager (noscript) -->
+                <noscript>
+                    <iframe src="https://www.googletagmanager.com/ns.html?id={{ tagmanagerConfig.config.wscTagManagerGoogleTagID|raw }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+                </noscript>
+            <!-- End Google Tag Manager (noscript) -->
+        {% endif %}
+    {% endif %}
+
+    {{ parent() }}
+
+{% endblock %}

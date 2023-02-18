@@ -1,0 +1,135 @@
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
+
+{% set tagmanagerConfig = config('TagManagerSW6') %}
+
+{% block layout_head_meta_tags %}
+
+{#  Start DataLayer #}
+
+    {% if tagmanagerConfig.config.wscTagManagerDataLayer == "1" and tagmanagerConfig.config.wscTagManagerDataLayerMatomo == "1" %}
+
+        {# ANFANG des Kopfes #}
+            <script>
+                window._mtm = window._mtm || [];
+                window._mtm.push({ ecommerce: null });
+                window._mtm.push({
+        {# ENDE des Kopfes #}
+
+            {% sw_include '@Storefront/storefront/layout/DataLayer.twig' %}
+
+        {# ANFANG des Fußes #}
+                });
+            </script>
+        {# ENDE des Fußes #}
+
+    {% endif %}
+
+    {% if tagmanagerConfig.config.wscTagManagerDataLayer == "1" and tagmanagerConfig.config.wscTagManagerDataLayerGoogle == "1" %}
+
+        {# ANFANG des Kopfes #}
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({ ecommerce: null });
+                window.dataLayer.push({
+        {# ENDE des Kopfes #}
+
+            {% sw_include '@Storefront/storefront/layout/DataLayer.twig' %}
+
+        {# ANFANG des Fußes #}
+                });
+            </script>
+        {# ENDE des Fußes #}
+
+    {% endif %}
+
+{# End DataLayer #}
+
+{# Start WSC Matomo #}
+
+    {% if (tagmanagerConfig.config.wscTagManagerMatomo == "1" and tagmanagerConfig.config.wscTagManagerMatomoTM == "1") or (tagmanagerConfig.config.wscTagManagerMatomo == "1" and tagmanagerConfig.config.wscTagManagerMatomoPage == "1") %}
+
+        {% if (tagmanagerConfig.config.wscTagManagerMatomoTM == "1" and tagmanagerConfig.config.wscTagManagerMatomoTMID != 'XxxXXxxX') or (tagmanagerConfig.config.wscTagManagerMatomoTM == "1" and tagmanagerConfig.config.wscTagManagerMatomoTMID != '') %}
+            <!-- Start Matomo Tag Manager -->
+                <script>
+                    var _mtm = window._mtm = window._mtm || [];
+                    _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
+                    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                    g.async=true; g.src='{{ tagmanagerConfig.config.wscTagManagerMatomoURL|raw }}/js/container_{{ tagmanagerConfig.config.wscTagManagerMatomoTMID|raw }}.js'; s.parentNode.insertBefore(g,s);
+                </script>
+            <!-- End Matomo Tag Manager -->
+        {% endif %}
+
+        {% if (tagmanagerConfig.config.wscTagManagerMatomoPage == "1" and tagmanagerConfig.config.wscTagManagerMatomoPageID != 'X') or (tagmanagerConfig.config.wscTagManagerMatomoPage == "1" and tagmanagerConfig.config.wscTagManagerMatomoPageID != '') %}
+            <!-- Start Matomo Page Code -->
+                <script>
+                    var _paq = window._paq = window._paq || [];
+                    _paq.push(['trackPageView']);
+                    _paq.push(['enableLinkTracking']);
+                    /* tracker methods like "setCustomDimension" should be called before "track PageView" */
+                    {% if tagmanagerConfig.config.wscTagManagerMatomoPageIDSubdomains == "1" %}
+                        _paq.push(["setCookieDomain", "*.HOST"]);
+                    {% endif %}
+                    {% if tagmanagerConfig.config.wscTagManagerMatomoPageIDnoTracking == "1" %}
+                        _paq.push(["setDoNotTrack", true]);
+                    {% endif %}
+                    {% if tagmanagerConfig.config.wscTagManagerMatomoPageIDnoCookies == "1" %}
+                        _paq.push(["disableCookies"]);
+                    {% endif %}
+                    (function() {
+                        var u="{{ tagmanagerConfig.config.wscTagManagerMatomoURL|raw }}/";
+                        _paq.push(['setTrackerUrl', u+'matomo.php']);
+                        _paq.push(['setSiteId', '{{ tagmanagerConfig.config.wscTagManagerMatomoPageID|raw }}']);
+                        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+                    })();
+                </script>
+            <!-- End Matomo Page Code -->
+        {% endif %}
+    {% endif %}
+
+{# End Matomo #}
+
+{# Start WSC Google #}
+
+    {% if (tagmanagerConfig.config.wscTagManagerGoogle == "1" and tagmanagerConfig.config.wscTagManagerGoogleTM == "1") or (tagmanagerConfig.config.wscTagManagerGoogle == "1" and tagmanagerConfig.config.wscTagManagerGoogleA4 == "1") or (tagmanagerConfig.config.wscTagManagerGoogle == "1" and tagmanagerConfig.config.wscTagManagerGoogleUA == "1") %}
+
+        {% if tagmanagerConfig.config.wscTagManagerGoogleTM == "1" and tagmanagerConfig.config.wscTagManagerGoogleTagID != "GTM-xxxxxxx" and tagmanagerConfig.config.wscTagManagerGoogleTagID != "" %}
+            <!-- Google Tag Manager -->
+                <script>
+                    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                    })(window,document,'script','dataLayer','{{ tagmanagerConfig.config.wscTagManagerGoogleTagID|raw }}');
+                </script>
+            <!-- End Google Tag Manager -->
+        {% endif %}
+
+        {% if tagmanagerConfig.config.wscTagManagerGoogleA4 == "1" and tagmanagerConfig.config.wscTagManagerGoogleA4ID != "G-xxxxxxxxxx" and tagmanagerConfig.config.wscTagManagerGoogleA4ID != "" %}
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+                <script async src="https://www.googletagmanager.com/gtag/js?id={{ tagmanagerConfig.config.wscTagManagerGoogleA4ID|raw }}"></script>
+                <script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '{{ tagmanagerConfig.config.wscTagManagerGoogleA4ID|raw }}');
+                </script>
+        {% endif %}
+
+        {% if tagmanagerConfig.config.wscTagManagerGoogleUA == "1" and tagmanagerConfig.config.wscTagManagerGoogleUAID != "UA-xxxxxxxx-x" and tagmanagerConfig.config.wscTagManagerGoogleUAID != "" %}
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+                <script async src="https://www.googletagmanager.com/gtag/js?id={{ tagmanagerConfig.config.wscTagManagerGoogleUAID|raw }}"></script>
+                <script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '{{ tagmanagerConfig.config.wscTagManagerGoogleUAID|raw }}'{% if tagmanagerConfig.config.wscTagManagerGoogleAnonymizeIP == "1" %}, { 'anonymize_ip': true }{% endif %});
+                </script>
+        {% endif %}
+
+    {% endif %}
+
+{# End WSC Google #}
+
+    {{ parent() }}
+{% endblock %}

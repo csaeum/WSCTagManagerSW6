@@ -1,0 +1,28 @@
+{
+    "cookie": {
+        "Bing": "Bing",
+        "BingDescription": "Cookie für Bing (Microsoft Corporation Advertising)",
+        "Clarity": "Clarity",
+        "ClarityDescription": "Cookie für Clarity (Microsoft Corporation Clarity)",
+        "Facebook": "Facebook",
+        "FacebookDescription": "Cookie für Facebook (Meta Platforms Ireland Limited)",
+        "Google": "Google",
+        "GoogleDescription": "Cookie für Analytics / Tag-Manager (Google Ireland Limited)",
+        "GoogleADs": "GoogleADs",
+        "GoogleADsDescription": "Cookie für AdWords (Google Ireland Limited)",
+        "Hotjar": "Hotjar",
+        "HotjarDescription": "Cookie für Hotjar Limited",
+        "Instagram": "Instagram",
+        "InstagramDescription": "Cookie für Instagram (Meta Platforms Ireland Limited)",
+        "Matomo": "Matomo",
+        "MatomoDescription": "Cookie für Matomo",
+        "Mautic": "Mautic",
+        "MauticDescription": "Cookie für Mautic",
+        "Pinterest": "Pinterest",
+        "PinterestDescription": "Cookie für Pinterest Inc.",
+        "Youtube": "Youtube",
+        "YoutubeDescription": "Cookie für Youtube (Google Ireland Limited)",
+        "Zammad": "Zammad",
+        "ZammadDescription": "Cookie für Zammad"
+    }
+}

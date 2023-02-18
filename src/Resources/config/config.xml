@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title lang="de-DE">Matomo</title>
+        <title lang="en-EN">Matomo</title>
+
+        <input-field type="bool">
+            <name>wscTagManagerMatomo</name>
+            <label lang="de-DE">Matomo Allgemein aktivieren</label>
+            <label lang="en-EN">Turn on Matomo General</label>
+            <defaultValue>false</defaultValue>
+            <helpText lang="de-DE">Soll Matomo generell geladen werden. So kann man es auch mal abschalten ohne die Einstellungen zu verlieren</helpText>
+            <helpText lang="en-EN">Should Matomo generally be loaded. So you can switch it off without losing the settings</helpText>
+        </input-field>
+        
+        <input-field type="text">
+            <name>wscTagManagerMatomoURL</name>
+            <label lang="de-DE">Matomo URL (ohne den abschließenden '/')</label>
+            <label lang="en-EN">Matomo URL (without the trailing '/')</label>
+            <defaultValue>https://mein.Matomo.de</defaultValue>
+            <placeholder>https://mein.Matomo.de</placeholder>
+            <helpText lang="de-DE">Ihre URL zu Matomo ohne den abschließenden '/'</helpText>
+            <helpText lang="en-EN">Your URL to Matomo without the trailing '/'</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>wscTagManagerMatomoTM</name>
+            <label lang="de-DE">Matomo TagManager aktivieren</label>
+            <label lang="en-EN">Activate Matomo TagManager</label>
+            <defaultValue>false</defaultValue>
+            <helpText lang="de-DE">Soll der Tag Manager generell geladen werden. So kann man es auch mal abschalten ohne die Einstellungen zu verlieren</helpText>
+            <helpText lang="en-EN">Should the Tag Manager generally be loaded. So you can switch it off without losing the settings</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>wscTagManagerMatomoTMID</name>
+            <label lang="de-DE">Matomo Container ID</label>
+            <label lang="en-EN">Matomo Container ID</label>
+            <defaultValue>XxxXXxxX</defaultValue>
+            <placeholder>XxxXXxxX</placeholder>
+            <helpText lang="de-DE">Zu finden im Matomo beim einrichten ihres TagManagers</helpText>
+            <helpText lang="en-EN">You can find it in Matomo when setting up your TagManager</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>wscTagManagerMatomoPage</name>
+            <label lang="de-DE">Matomo Seiten ID aktivieren</label>
+            <label lang="en-EN">Activate Matomo Page ID</label>
+            <defaultValue>false</defaultValue>
+            <helpText lang="de-DE">Soll das Matomo Script für einfaches Tracking generell geladen werden. So kann man es auch mal abschalten ohne die Einstellungen zu verlieren</helpText>
+            <helpText lang="en-EN">Should the Matomo script be generally loaded for simple tracking. So you can switch it off without losing the settings</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>wscTagManagerMatomoPageID</name>
+            <label lang="de-DE">Matomo Seiten ID</label>
+            <label lang="en-EN">Matomo Page ID</label>
+            <defaultValue>X</defaultValue>
+            <placeholder>X</placeholder>
+            <helpText lang="de-DE">Zu finden im Matomo beim einrichten ihrer Seite</helpText>
+            <helpText lang="en-EN">You can find it in Matomo when setting up your site</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>wscTagManagerMatomoPageIDSubdomains</name>
+            <label lang="de-DE">Alle Subdomains mit tracken</label>
+            <label lang="en-EN">Track all subdomains</label>
+            <defaultValue>false</defaultValue>
+            <helpText lang="de-DE">Hierdurch werden Besucher, die x.ihreDomain.de und y.ihreDomain.de besuchen als eindeutige Besucher gewertet.</helpText>
+            <helpText lang="en-EN">As a result, visitors who visit x.yourdomain.de and y.yourdomain.de are counted as unique visitors.</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>wscTagManagerMatomoPageIDnoTracking</name>
+            <label lang="de-DE">Tracking-Anfragen nicht senden</label>
+            <label lang="en-EN">Do not send tracking requests</label>
+            <defaultValue>false</defaultValue>
+            <helpText lang="de-DE">Hierdurch werden Tracking-Anfragen nicht gesendet, falls der Benutzer nicht getrackt werden möchte. Hinweis: Diese Einstellung hat keine Auswirkung, da die Do-Not-Track Unterstützung serverseitig aktiviert ist.</helpText>
+            <helpText lang="en-EN">This will not send tracking requests if the user does not want to be tracked. Note: This setting has no effect because Do-Not-Track support is enabled on the server side.</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>wscTagManagerMatomoPageIDnoCookies</name>
+            <label lang="de-DE">Alle Tracking Cookies deaktivieren</label>
+            <label lang="en-EN">Disable all tracking cookies</label>
+            <defaultValue>false</defaultValue>
+            <helpText lang="de-DE">Deaktiviert alle First-Party Cookies. Bestehende Matomo Cookies für diese Webseite werden beim nächsten Seitenaufruf gelöscht.</helpText>
+            <helpText lang="en-EN">Disables all first-party cookies. Existing Matomo cookies for this website will be deleted the next time the page is accessed.</helpText>
+        </input-field>
+    </card>
+
+    <card>
+        <title lang="de-DE">Google</title>
+        <title lang="en-EN">Google</title>
+
+        <input-field type="bool">
+            <name>wscTagManagerGoogle</name>
+            <label lang="de-DE">Google Allgemein aktivieren</label>
+            <label lang="en-EN">Turn on Google General</label>
+            <defaultValue>false</defaultValue>
+            <helpText lang="de-DE">Soll der Google generell geladen werden. So kann man es auch mal abschalten ohne die Einstellungen zu verlieren</helpText>
+            <helpText lang="en-EN">ShouShould the Google generally be loaded. So you can switch it off without losing the settings</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>wscTagManagerGoogleTM</name>
+            <label lang="de-DE">Google TagManager aktivieren</label>
+            <label lang="en-EN">Activate Google Tag Manager</label>
+            <defaultValue>false</defaultValue>
+            <helpText lang="de-DE">Soll der Tag Manager generell geladen werden. So kann man es auch mal abschalten ohne die Einstellungen zu verlieren</helpText>
+            <helpText lang="en-EN">ShouShould the Tag Manager generally be loaded. So you can switch it off without losing the settings</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>wscTagManagerGoogleTagID</name>
+            <label lang="de-DE">Tag Manager GTM</label>
+            <label lang="en-EN">Tag Manager GTM</label>
+            <defaultValue>GTM-xxxxxxx</defaultValue>
+            <placeholder>GTM-xxxxxxx</placeholder>
+            <helpText lang="de-DE">Zu finden unter tagmanager.google.com</helpText>
+            <helpText lang="en-EN">It can be found at tagmanager.google.com</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>wscTagManagerGoogleA4</name>
+            <label lang="de-DE">Google Analytics 4 aktivieren (neu ab 14. Oktober 2020)</label>
+            <label lang="en-EN">Activate Google Analytics 4 (new from October 14, 2020)</label>
+            <defaultValue>false</defaultValue>
+            <helpText lang="de-DE">Soll Google Analytics 4 generell geladen werden. So kann man es auch mal abschalten ohne die Einstellungen zu verlieren</helpText>
+            <helpText lang="en-EN">Should Google Analytics 4 generally be loaded. So you can switch it off without losing the settings</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>wscTagManagerGoogleA4ID</name>
+            <label lang="de-DE">Google Analytics 4</label>
+            <label lang="en-EN">Google Analytics 4</label>
+            <defaultValue>G-xxxxxxxxxx</defaultValue>
+            <placeholder>G-xxxxxxxxxx</placeholder>
+            <helpText lang="de-DE">Zu finden unter analytics.google.com, nutzt gtag</helpText>
+            <helpText lang="en-EN">Located at analytics.google.com, uses gtag</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>wscTagManagerGoogleUA</name>
+            <label lang="de-DE">Google Analytics Universal Analytics aktivieren (alt bis 14. Oktober 2020)</label>
+            <label lang="en-EN">Activate Google Analytics Universal Analytics (old to October 14, 2020)</label>
+            <defaultValue>false</defaultValue>
+            <helpText lang="de-DE">Soll Google Analytics Universal Analytics generell geladen werden. So kann man es auch mal abschalten ohne die Einstellungen zu verlieren</helpText>
+            <helpText lang="en-EN">Should Google Analytics Universal Analytics generally be loaded. So you can switch it off without losing the settings</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>wscTagManagerGoogleUAID</name>
+            <label lang="de-DE">Google Analytics Universal Analytics</label>
+            <label lang="en-EN">Google Analytics Universal Analytics</label>
+            <defaultValue>UA-xxxxxxxx-x</defaultValue>
+            <placeholder>UA-xxxxxxxx-x</placeholder>
+            <helpText lang="de-DE">Zu finden unter analytics.google.com, nutzt gtag</helpText>
+            <helpText lang="en-EN">Located at analytics.google.com, uses gtag</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>wscTagManagerGoogleAnonymizeIP</name>
+            <label lang="de-DE">Google Analytics IP Anonymisierung</label>
+            <label lang="en-EN">Google Analytics IP anonymization</label>
+            <defaultValue>false</defaultValue>
+            <helpText lang="de-DE">(Empfohlen!) Aktivieren um die IP Adresse des Besuchers zu verschleiern</helpText>
+            <helpText lang="en-EN">(Recommended!) Enable to disguise the visitor's IP address</helpText>
+        </input-field>
+    </card>
+
+    <card>
+        <title lang="de-DE">DataLayer</title>
+        <title lang="en-EN">DataLayer</title>
+        <input-field type="bool">
+            <name>wscTagManagerDataLayer</name>
+            <label lang="de-DE">DataLayer aktivieren</label>
+            <label lang="en-EN">Activate data layer</label>
+            <defaultValue>false</defaultValue>
+            <helpText lang="de-DE">(Empfohlen!) Aktivieren um den DataLayer im Header zu erzeugen</helpText>
+            <helpText lang="en-EN">(Recommended!) Activate to create the DataLayer in the header</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>wscTagManagerDataLayerMatomo</name>
+            <label lang="de-DE">DataLayer Matomo aktivieren</label>
+            <label lang="en-EN">Activate Matomo data layer</label>
+            <defaultValue>false</defaultValue>
+            <helpText lang="de-DE">(Empfohlen!) Aktivieren um den DataLayer für Matomo im Header zu erzeugen</helpText>
+            <helpText lang="en-EN">(Recommended!) Activate to create the DataLayer for Matomo in the header</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>wscTagManagerDataLayerGoogle</name>
+            <label lang="de-DE">DataLayer Google aktivieren</label>
+            <label lang="en-EN">Activate Google data layer</label>
+            <defaultValue>false</defaultValue>
+            <helpText lang="de-DE">(Empfohlen!) Aktivieren um den DataLayer für Google im Header zu erzeugen</helpText>
+            <helpText lang="en-EN">(Recommended!) Activate to create the for Google DataLayer in the header</helpText>
+        </input-field>
+    </card>
+</config>

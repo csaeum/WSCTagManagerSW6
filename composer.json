@@ -1,0 +1,24 @@
+{
+    "name": "wsc/wsc-tagmanager-sw6",
+    "description": "Tag Manager Matomo and Google for Shopware 6",
+    "keywords": ["shopware", "shopware-plugin", "matomo-tag-manager", "google-tag-manager", "datalayer"],
+    "license": "GPL-3.0-or-later",
+    "type": "shopware-platform-plugin",
+    "version": "v1.0.0",
+    "authors": [{
+        "name": "Web-SEO-Consulting"
+    }],
+    "autoload": {
+        "psr-4": {
+            "WSC\\TagManagerSW6\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "WSC\\TagManagerSW6\\TagManagerSW6",
+        "copyright": "(c) by Web-SEO-Consulting",
+        "label": {
+            "de-DE": "Tag Manager - Shopware 6 - Matomo und Google",
+            "en-GB": "Tag Manager - Shopware 6 - Matomo and Google"
+        }
+    }
+}
